@@ -2,6 +2,14 @@
 
 Application Vue.js 3 + Firebase pour gérer projets et tâches avec Kanban.
 
+## Membres du projet
+
+- Fatima Bousmiti
+- Touria Chiguer
+- Sara lamraidi
+- Siham bouzarmin
+
+
 ## Liens
 - **App déployée** : https://project-management-app-9ad17.web.app
 - **GitHub** : https://github.com/SaraLAMRAIDI/project-management-app.git
