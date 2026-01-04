@@ -25,14 +25,11 @@ export const useProjectStore = defineStore('project', () => {
   let unsubscribeProjects = null;
   let unsubscribeTasks = null;
 
-  // Computed
   const todoTasks = computed(() => tasks.value.filter(t => t.status === 'todo'));
   const doingTasks = computed(() => tasks.value.filter(t => t.status === 'doing'));
   const doneTasks = computed(() => tasks.value.filter(t => t.status === 'done'));
 
-  // ============ PROJECTS ============
 
-  // Listen to projects in real-time
   const subscribeToProjects = (userId) => {
     if (unsubscribeProjects) unsubscribeProjects();
 
@@ -52,7 +49,6 @@ export const useProjectStore = defineStore('project', () => {
     });
   };
 
-  // Create project
   const createProject = async (projectData) => {
     const authStore = useAuthStore();
     try {
@@ -74,7 +70,6 @@ export const useProjectStore = defineStore('project', () => {
     }
   };
 
-  // Update project
   const updateProject = async (projectId, projectData) => {
     try {
       loading.value = true;
@@ -93,13 +88,11 @@ export const useProjectStore = defineStore('project', () => {
     }
   };
 
-  // Delete project
   const deleteProject = async (projectId) => {
     try {
       loading.value = true;
       error.value = null;
 
-      // Delete all tasks first
       const tasksQuery = query(collection(db, 'projects', projectId, 'tasks'));
       const tasksSnapshot = await getDocs(tasksQuery);
       
@@ -108,7 +101,6 @@ export const useProjectStore = defineStore('project', () => {
       );
       await Promise.all(deletePromises);
 
-      // Then delete the project
       await deleteDoc(doc(db, 'projects', projectId));
       
       if (currentProject.value?.id === projectId) {
@@ -122,9 +114,8 @@ export const useProjectStore = defineStore('project', () => {
     }
   };
 
-  // ============ TASKS ============
+  
 
-  // Listen to tasks in real-time
   const subscribeToTasks = (projectId) => {
     if (unsubscribeTasks) unsubscribeTasks();
 
@@ -141,7 +132,7 @@ export const useProjectStore = defineStore('project', () => {
     });
   };
 
-  // Create task
+
   const createTask = async (projectId, taskData) => {
     try {
       loading.value = true;
@@ -160,7 +151,7 @@ export const useProjectStore = defineStore('project', () => {
     }
   };
 
-  // Update task
+
   const updateTask = async (projectId, taskId, taskData) => {
     try {
       loading.value = true;
@@ -179,7 +170,7 @@ export const useProjectStore = defineStore('project', () => {
     }
   };
 
-  // Delete task
+
   const deleteTask = async (projectId, taskId) => {
     try {
       loading.value = true;
@@ -194,12 +185,12 @@ export const useProjectStore = defineStore('project', () => {
     }
   };
 
-  // Set current project
+
   const setCurrentProject = (project) => {
     currentProject.value = project;
   };
 
-  // Cleanup
+
   const cleanup = () => {
     if (unsubscribeProjects) {
       unsubscribeProjects();

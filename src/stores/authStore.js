@@ -14,7 +14,7 @@ export const useAuthStore = defineStore('auth', () => {
   const loading = ref(true);
   const error = ref(null);
 
-  // Initialize auth state listener
+
   const initAuth = () => {
     return new Promise((resolve) => {
       onAuthStateChanged(auth, (firebaseUser) => {
@@ -34,7 +34,7 @@ export const useAuthStore = defineStore('auth', () => {
     });
   };
 
-  // Register with email/password
+
   const register = async (email, password) => {
     try {
       error.value = null;
@@ -46,7 +46,7 @@ export const useAuthStore = defineStore('auth', () => {
     }
   };
 
-  // Login with email/password
+
   const login = async (email, password) => {
     try {
       error.value = null;
@@ -58,7 +58,7 @@ export const useAuthStore = defineStore('auth', () => {
     }
   };
 
-  // Login with Google
+
   const loginWithGoogle = async () => {
     try {
       error.value = null;
@@ -70,7 +70,7 @@ export const useAuthStore = defineStore('auth', () => {
     }
   };
 
-  // Logout
+
   const logout = async () => {
     try {
       error.value = null;
